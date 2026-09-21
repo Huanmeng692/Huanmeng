@@ -1,0 +1,14 @@
+# 测试目录
+test/
+
+# HTML文件
+dist/
+
+# 文档
+doc/
+
+# 编辑器配置
+.vscode/
+
+# 故事格式
+.storyformats/
