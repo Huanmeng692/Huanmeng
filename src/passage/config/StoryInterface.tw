@@ -1,0 +1,24 @@
+:: StoryInterface
+<div id="huanmeng" class="dark">
+	<div id="top">
+		<div id="top-left-bottom">
+			<button id="display-mode"></button>
+			<button id="setting"></button>
+		</div>
+		<div id="top-right-bottom">
+			<button id="save"></button>
+			<button id="restart"></button>
+		</div>
+	</div>
+	<div id="main">
+		<div id="passages"></div>
+	</div>
+	<div id="bottom">
+		<div id="bottom-button">
+			<button id="bag"></button>
+			<button id="map"></button>
+			<button id="clothing"></button>
+			<button id="note"></button>
+		</div>
+	</div>
+</div>

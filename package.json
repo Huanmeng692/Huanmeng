@@ -1,0 +1,14 @@
+{
+	"name": "Huanmeng",
+	"version": "0.1.0",
+	"private":"true",
+	"description": "暂时还没想好名字",
+	"engines": {
+		"node": ">=18"
+	},
+
+	"scripts": {
+		"build": "tweers build src/ -o dist/game.html",
+		"test": "tweers build src/ -o dist/game.html -t"
+	}
+}
