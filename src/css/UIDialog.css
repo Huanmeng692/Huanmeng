@@ -1,0 +1,22 @@
+.draggable-box {
+	position: absolute;
+	left: 50px;
+	top: 50px;
+	width: 280px;
+	height: 200px;
+	background: var(--hm-main-bg);
+	border: #000000 solid 1px;
+	border-radius: 8px;
+	color: var(--hm-text);
+	font: 16px/1 sans-serif;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: grab;
+	user-select: none;
+	touch-action: none;
+}
+
+.draggable-box.dragging {
+	cursor: grabbing;
+}

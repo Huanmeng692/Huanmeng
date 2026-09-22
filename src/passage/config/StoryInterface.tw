@@ -16,9 +16,9 @@
 	<div id="bottom">
 		<div id="bottom-button">
 			<button id="bag"></button>
-			<button id="map"></button>
 			<button id="clothing"></button>
-			<button id="note"></button>
+			<button id="map"></button>
+			<button id="status"></button>
 		</div>
 	</div>
 </div>

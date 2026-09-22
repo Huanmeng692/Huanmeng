@@ -1,0 +1,243 @@
+/* ==========================================================================
+   StoryInterface —— 全屏游戏界面样式
+   对应 src/passage/config/StoryInterface.tw 的结构：
+
+     #huanmeng
+     ├── #top        -> #top-left-bottom（#display-mode / #setting）
+     │               -> #top-right-bottom（#save / #restart）
+     ├── #main       -> #passages
+     └── #bottom     -> #bottom-button（#bag / #map / #clothing / #note）
+
+   主题：
+     #huanmeng.dark  -> 深色模式
+     #huanmeng       -> 浅色模式（不带 dark 类名）
+
+   按钮文字全部由 CSS 生成（子元素 ::after），#display-mode 显示图标：
+     深色模式 -> 月亮，浅色模式 -> 太阳
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. 主题变量
+   -------------------------------------------------------------------------- */
+
+/* 浅色模式（默认，#huanmeng 无 dark 类名） */
+#huanmeng {
+	--hm-bg: #f2f4f8;
+	--hm-main-bg: #ffffff;
+	--hm-panel-bg: rgba(255, 255, 255, 0.94);
+	--hm-text: #22262e;
+	--hm-text-muted: #66707e;
+	--hm-border: rgba(34, 38, 46, 0.15);
+	--hm-button-bg: #ffffff;
+	--hm-button-hover-bg: #e9eef7;
+	--hm-button-active-bg: #dbe2f0;
+	--hm-accent: #4667d0;
+	--hm-shadow: 0 2px 8px rgba(34, 38, 46, 0.12);
+}
+
+/* 深色模式（#huanmeng 带 dark 类名） */
+#huanmeng.dark {
+	--hm-bg: #11141a;
+	--hm-main-bg: #1b1f26;
+	--hm-panel-bg: rgba(26, 30, 37, 0.94);
+	--hm-text: #e6e9ef;
+	--hm-text-muted: #9aa4b2;
+	--hm-border: rgba(230, 233, 239, 0.16);
+	--hm-button-bg: #232931;
+	--hm-button-hover-bg: #2e3641;
+	--hm-button-active-bg: #39424f;
+	--hm-accent: #7b9bff;
+	--hm-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+/* --------------------------------------------------------------------------
+   2. 整体容器：铺满屏幕，纵向三段式布局
+   -------------------------------------------------------------------------- */
+
+#huanmeng {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	box-sizing: border-box;
+	background-color: var(--hm-bg);
+	color: var(--hm-text);
+	font-family: inherit;
+	transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* SugarCube 使用 StoryInterface 时会移除 #style-core-display，
+   这里再显式重置一次，避免默认的居中与边距影响全屏布局 */
+#huanmeng #passages {
+	max-width: 54em;
+	margin: 0 auto;
+}
+
+/* --------------------------------------------------------------------------
+   3. 顶部栏：位于屏幕顶部，宽度 100%
+   -------------------------------------------------------------------------- */
+
+#top {
+	display: flex;
+	flex: 0 0 auto;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0.5em 0.75em;
+	background-color: var(--hm-panel-bg);
+	border-bottom: 1px solid var(--hm-border);
+	box-shadow: var(--hm-shadow);
+	transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+#top-left-bottom,
+#top-right-bottom {
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+}
+
+/* --------------------------------------------------------------------------
+   4. 主区域：占据顶栏与底栏之间的全部空间
+   -------------------------------------------------------------------------- */
+
+#main {
+	position: relative;
+	flex: 1 1 auto;
+	width: 100%;
+	box-sizing: border-box;
+	overflow-y: auto;
+	overflow-x: hidden;
+	background-color: var(--hm-main-bg);
+	transition: background-color 0.25s ease;
+}
+
+#main > #passages {
+	padding: 1em 1.25em;
+	line-height: 1.75;
+}
+
+/* --------------------------------------------------------------------------
+   5. 底部栏：位于屏幕底部，宽度 100%
+   #bottom-button 位于屏幕左侧
+   -------------------------------------------------------------------------- */
+
+#bottom {
+	display: flex;
+	flex: 0 0 auto;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0.5em 0.75em;
+	background-color: var(--hm-panel-bg);
+	border-top: 1px solid var(--hm-border);
+	box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.12);
+	transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+/* 靠左对齐（margin-right: auto 把后续内容推到右侧） */
+#bottom-button {
+	display: flex;
+	align-items: center;
+	gap: 0.5em;
+	margin-right: auto;
+}
+
+/* --------------------------------------------------------------------------
+   6. 按钮通用样式
+   -------------------------------------------------------------------------- */
+
+#huanmeng button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	min-width: 3.75em;
+	padding: 0.45em 0.85em;
+	background-color: var(--hm-button-bg);
+	color: var(--hm-text);
+	border: 1px solid var(--hm-border);
+	border-radius: 0.5em;
+	font-family: inherit;
+	font-size: 0.95rem;
+	line-height: 1.2;
+	white-space: nowrap;
+	cursor: pointer;
+	-webkit-user-select: none;
+	user-select: none;
+	transition: background-color 0.2s ease, color 0.2s ease,
+		border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#huanmeng button:hover {
+	background-color: var(--hm-button-hover-bg);
+	border-color: var(--hm-accent);
+}
+
+#huanmeng button:active {
+	background-color: var(--hm-button-active-bg);
+}
+
+#huanmeng button:focus-visible {
+	outline: 2px solid var(--hm-accent);
+	outline-offset: 2px;
+}
+
+/* 按钮文字（除 #display-mode 外）统一由 CSS 设置 */
+#setting::after {
+	content: "设置";
+}
+
+#save::after {
+	content: "存档";
+}
+
+#restart::after {
+	content: "重开";
+}
+
+#bag::after {
+	content: "背包";
+}
+
+#clothing::after {
+	content: "衣物";
+}
+
+#map::after {
+	content: "地图";
+}
+
+#status::after {
+	content: "状态";
+}
+
+/* --------------------------------------------------------------------------
+   7. 显示模式按钮：#display-mode
+   浅色模式 -> 太阳；深色模式 -> 月亮
+   -------------------------------------------------------------------------- */
+
+#display-mode {
+	min-width: 2.5em;
+	padding: 0.45em 0.6em;
+	font-family: "Segoe UI Emoji", "Segoe UI Symbol", "Apple Color Emoji",
+		"Noto Color Emoji", sans-serif;
+}
+
+/* 浅色模式：太阳 */
+#display-mode::after {
+	content: "☀";
+	font-size: 1.05rem;
+	line-height: 1;
+}
+
+/* 深色模式：月亮 */
+#huanmeng.dark #display-mode::after {
+	content: "🌙";
+}
